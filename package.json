@@ -1,0 +1,75 @@
+{
+  "name": "code-comment-generator",
+  "displayName": "CodeCommentGenerator",
+  "description": "AI-powered code comment generator using Grok API",
+  "publisher": "Hanish",
+  "version": "0.0.1",
+  "engines": {
+    "vscode": "^1.93.0"
+  },
+  "categories": [
+    "Programming Languages",
+    "Productivity"
+  ],
+
+  "main": "./out/extension.js",
+
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeCommentGenerator.generateComments",
+        "title": "Generate Code Comments"
+      },
+      {
+        "command": "codeCommentGenerator.setApiKey",
+        "title": "CodeCommentGenerator: Set Grok API Key"
+      }
+    ],
+    "configuration": {
+      "title": "Code Comment Generator",
+      "properties": {
+        "codeCommentGenerator.commentStyle": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "verbose",
+            "jsdoc",
+            "docstring"
+          ],
+          "default": "minimal",
+          "description": "Style of generated comments."
+        }
+      }
+    }
+  },
+
+  "scripts": {
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
+  },
+
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.93.0",
+    "@typescript-eslint/eslint-plugin": "^8.45.0",
+    "@typescript-eslint/parser": "^8.45.0",
+    "@vscode/test-cli": "^0.0.11",
+    "@vscode/test-electron": "^2.5.2",
+    "esbuild": "^0.25.10",
+    "eslint": "^9.36.0",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.9.3"
+  },
+
+  "dependencies": {
+    "axios": "^1.7.7"
+  }
+}
